@@ -11,7 +11,6 @@
 ```bash
 ~ $ git clone git@github.com:arrrlo/indiserver_log_viewer.git
 ~ $ cd indiserver_log_viewer
-~/indiserver_log_viewer $ cd indiserver_log_viewer
 ~/indiserver_log_viewer $ docker-compose build
 ~/indiserver_log_viewer $ docker-compose up
 ```
