@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8030:8080"
+    volumes:
+      - .:/indiserver_log_viewer
+      - ./logs:/indiserver_log_viewer/logs
+    environment:
+      - LOG_FILE_PATH=/indiserver_log_viewer/logs/indiserver.log
+

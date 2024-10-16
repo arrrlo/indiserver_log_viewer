@@ -1,12 +1,13 @@
 import asyncio
+import os
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 class LogConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
 
-        # Path to your log file
-        self.log_file_path = '/path/to/your/logfile.log'
+        # Get log file path from environment variable
+        self.log_file_path = os.environ.get('LOG_FILE_PATH', '/app/logs/logfile.log')
 
         # Open the log file in read mode
         self.logfile = open(self.log_file_path, 'r')
@@ -31,3 +32,4 @@ class LogConsumer(AsyncWebsocketConsumer):
                     await asyncio.sleep(1)  # Wait before checking for new lines
         except asyncio.CancelledError:
             pass
+
