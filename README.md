@@ -1,4 +1,37 @@
-# INDI server log viewer  
+<pre>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣶⡀⢺⣦⠀⠀⠂⢄⡀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣧⠈⣿⣧⠀⠀⠀⠹⣷⠄⠀⣠⠀⢾⠘⠧⠀⠀⠀
+⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⡆⢸⣿⣧⠀⠀⠀⣠⣴⡄⢸⣆⠘⢦⡴⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⣿⣿⡄⠰⣾⣿⣿⣷⡄⠙⠃⠀⠀⠀⠀⠀
+⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢹⣿⣧⠀⣿⡿⠟⠉⢠⣤⠀⠀⠀⠀⠀⠀
+⠀⠀⢈⠙⠛⠛⠻⠿⠿⠿⠿⠿⣿⡇⢸⡿⠿⠀⠉⠀⠀⠀⠘⠉⠀⠀⠀⠀⠀⠀
+⠀⠀⠸⢿⣿⣷⣶⣶⣶⣶⣤⣤⣤⣤⣤⣤⣤⣴⣶⣶⣶⣿⣿⠿⠀⠀⠀⠀⠀⠀INDI server log viewer
+⠀⠀⢰⣤⣤⣤⣭⣍⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣭⣥⣤⣤⣶⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⡟⠉⠉⢻⣿⣿⠛⠙⣿⣿⣿⠉⠉⣿⣿⡇⠀⢸⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⠸⢿⣿⡇⠀⠀⢸⣿⣿⣤⣤⣿⣿⣿⣴⣶⣿⣿⣿⣶⣾⠿⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠛⠛⠛⠋⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+</pre>
+
+INDI server log viewer is a web application that allows you to view the logs 
+of the INDI server in real time.  
+
+In order to use this application, you need to have Kstars with Ekos and 
+INDI server installed on the machine with all astrophotography equipment 
+connected and run INDI server in terminal.  
+
+If you wish to have client-server setup in place (server machine outside 
+with the scope and client machine with you in the warmth of your house), 
+please [follow these steps](client-server.md).  
+
+### prerequisites:
+
+- Docker service installed
+- docker-compose installed
+- Kstarts installed with Ekos and INDI server (version 3.7.3 recommended)
 
 ### run INDI server:  
 

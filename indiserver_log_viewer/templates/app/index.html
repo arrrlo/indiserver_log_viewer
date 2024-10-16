@@ -2,49 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Real-Time Log Viewer</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>INDI server log viewer</title>
+    <!-- Bootstrap CSS (Optional, since we're customizing styles) -->
+    <!-- Remove Bootstrap if not needed -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
+
+    <!-- Custom Styles -->
     <style>
+        body {
+            background-color: #000;
+            color: #f0f0f0;
+            font-family: "Courier New", Courier, monospace;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 0 20px;
+        }
+
+        #ascii-art {
+            color: #0f0;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
         #log {
             height: 500px;
             overflow-y: scroll;
-            background-color: #343a40;
-            color: #fff;
+            background-color: #000;
+            color: #ccc;
             padding: 15px;
             border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f0;
+            font-family: "Courier New", Courier, monospace;
         }
     </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="text-center">Real-Time Log Viewer</h1>
-    <div id="log"></div>
-</div>
+    <div class="container">
+        <!-- Observatory ASCII Art -->
+        <pre id="ascii-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣶⡀⢺⣦⠀⠀⠂⢄⡀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣧⠈⣿⣧⠀⠀⠀⠹⣷⠄⠀⣠⠀⢾⠘⠧⠀⠀⠀
+⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⡆⢸⣿⣧⠀⠀⠀⣠⣴⡄⢸⣆⠘⢦⡴⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⣿⣿⡄⠰⣾⣿⣿⣷⡄⠙⠃⠀⠀⠀⠀⠀
+⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⢹⣿⣧⠀⣿⡿⠟⠉⢠⣤⠀⠀⠀⠀⠀⠀
+⠀⠀⢈⠙⠛⠛⠻⠿⠿⠿⠿⠿⣿⡇⢸⡿⠿⠀⠉⠀⠀⠀⠘⠉⠀⠀⠀⠀⠀⠀
+⠀⠀⠸⢿⣿⣷⣶⣶⣶⣶⣤⣤⣤⣤⣤⣤⣤⣴⣶⣶⣶⣿⣿⠿⠀⠀⠀⠀⠀⠀INDI server log viewer
+⠀⠀⢰⣤⣤⣤⣭⣍⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣉⣭⣥⣤⣤⣶⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⡟⠉⠉⢻⣿⣿⠛⠙⣿⣿⣿⠉⠉⣿⣿⡇⠀⢸⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⠸⢿⣿⡇⠀⠀⢸⣿⣿⣤⣤⣿⣿⣿⣴⣶⣿⣿⣿⣶⣾⠿⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠛⠛⠛⠋⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
-<!-- JavaScript -->
-<script>
-    (function() {
-        const logElement = document.getElementById('log');
-        const socket = new WebSocket(
-            'ws://' + window.location.host + '/ws/logs/'
-        );
+        </pre>
+        <!-- Log Display -->
+        <div id="log"></div>
+    </div>
 
-        socket.onmessage = function(event) {
-            const message = event.data;
-            logElement.textContent += message;
-            logElement.scrollTop = logElement.scrollHeight;
-        };
+    <!-- JavaScript -->
+    <script>
+        (function() {
+            const logElement = document.getElementById('log');
+            const socket = new WebSocket(
+                'ws://' + window.location.host + '/ws/logs/'
+            );
 
-        socket.onclose = function(event) {
-            console.error('WebSocket closed unexpectedly');
-        };
-    })();
-</script>
+            socket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                const message = data['message'];
 
-<!-- Optional Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+                // Append the message to the log element
+                logElement.textContent += message;
+
+                // Scroll to the bottom
+                logElement.scrollTop = logElement.scrollHeight;
+            };
+
+            socket.onclose = function(event) {
+                console.error('WebSocket closed unexpectedly');
+            };
+        })();
+    </script>
 </body>
 </html>
-

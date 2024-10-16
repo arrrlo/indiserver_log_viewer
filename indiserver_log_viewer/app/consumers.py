@@ -1,13 +1,18 @@
-import asyncio
 import os
+import json
+import asyncio
+
 from channels.generic.websocket import AsyncWebsocketConsumer
+
 
 class LogConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
 
         # Get log file path from environment variable
-        self.log_file_path = os.environ.get('LOG_FILE_PATH', '/app/logs/logfile.log')
+        self.log_file_path = os.environ.get(
+            'LOG_FILE_PATH', '/indiserver_log_viewer/logs/logfile.log'
+        )
 
         # Open the log file in read mode
         self.logfile = open(self.log_file_path, 'r')
@@ -27,7 +32,7 @@ class LogConsumer(AsyncWebsocketConsumer):
             while True:
                 line = self.logfile.readline()
                 if line:
-                    await self.send(line)
+                    await self.send(json.dumps({'message': line}))
                 else:
                     await asyncio.sleep(1)  # Wait before checking for new lines
         except asyncio.CancelledError:
