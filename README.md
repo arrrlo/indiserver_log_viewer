@@ -1,4 +1,4 @@
-<pre>
+<pre style="color: #0f0;font-family: 'Courier New', Courier, monospace;">
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣶⡀⢺⣦⠀⠀⠂⢄⡀⠀⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣧⠈⣿⣧⠀⠀⠀⠹⣷⠄⠀⣠⠀⢾⠘⠧⠀⠀⠀
@@ -27,19 +27,19 @@ If you wish to have client-server setup in place (server machine outside
 with the scope and client machine with you in the warmth of your house), 
 please [follow these steps](client-server.md).  
 
-### prerequisites:
+### ➡️ prerequisites:
 
 - Docker service installed
 - docker-compose installed
 - Kstarts installed with Ekos and INDI server (version 3.7.3 recommended)
 
-### run INDI server:  
+### ➡️ run INDI server:  
 
 ```bash
 ~ $ indiserver -vvv -p 8080 driver_name [driver_name] > ~/indiserver_log_viewer/indiserver_log_viewer/logs/indiserver.log 2>&1
 ```
 
-### run INDI server log viewer:  
+### ➡️ run INDI server log viewer:  
 
 ```bash
 ~ $ git clone git@github.com:arrrlo/indiserver_log_viewer.git
@@ -48,7 +48,7 @@ please [follow these steps](client-server.md).
 ~/indiserver_log_viewer $ docker-compose up
 ```
 
-### open log viewer web app:  
+### ➡️ open log viewer web app:  
 
 http://127.0.0.1:8030  
 
